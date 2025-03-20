@@ -1,0 +1,26 @@
+﻿@page "/MessageWall"
+
+<h3>Message Wall</h3>
+<EditForm Model="model" onsubmit="validSubmit">
+	<InputText @bind-Value="model.Message" />
+	<button type="submit">Submit</button>	
+</EditForm>
+<ul>
+	@foreach(string mesage in messages)
+	{
+		<li>@mesage</li>
+	}
+</ul>
+
+
+@code {
+	private MessageModel model = new();
+	private List<string> messages = new();
+
+	private void validSubmit()
+	{
+		messages.Add(model.Message);
+		Console.WriteLine("Message: " + model.Message);
+		model = new();
+	}
+}
